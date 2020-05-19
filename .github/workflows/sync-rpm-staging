@@ -55,7 +55,7 @@ jobs:
           echo "Sync the remote yum repo to your local directory. *Before you do this, ensure you export the correct set of AWS credentials.*"
           /github/home/bin/aws s3 sync s3://artifacts.opendistroforelasticsearch.amazon.com/yum/ yum/
           rm -rf yum/staging
-          /github/home/bin/aws s3 sync s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/rpms/ downloads/rpms/
+          /github/home/bin/aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/rpms/opendistro-elasticsearch/opendistroforelasticsearch-1.6.0.rpm downloads/rpms/
           
           echo "Add signatures to the new RPMs and copy them over to the Repo."
           yum install -y expect
