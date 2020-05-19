@@ -3,9 +3,6 @@ name: Sync RPM artifacts to 1.6.0 prod
 on:
   repository_dispatch:
     types: [sync-rpm-1.6.0]
-  
-  push:
-    branches: [weicongs-amazon-patch-3]
      
 jobs:
   signing-artifacts:   
