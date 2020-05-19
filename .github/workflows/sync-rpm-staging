@@ -3,7 +3,9 @@ name: Sync RPM artifacts to Staging
 on:
   repository_dispatch:
     types: [sync-rpm-staging]
-  
+  push:
+    branches: [weicongs-amazon-patch-3]
+    
 jobs:
   signing-artifacts:   
     name: Sign Yum
