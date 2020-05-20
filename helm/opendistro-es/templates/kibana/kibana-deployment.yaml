@@ -116,6 +116,10 @@ spec:
             name: elasticsearch-certs
             subPath: elk-rest-root-ca.pem
          {{- end }}
+         {{- if .Values.openid.pemTrustedCas.existingSecret }}
+          - mountPath: {{ .Values.kibana.certsDirectory }}/openid-root-ca
+            name: openid-root-ca
+         {{- end }}
         ports:
         - containerPort: {{ .Values.kibana.port }}
       serviceAccountName: {{ template "opendistro-es.kibana.serviceAccountName" . }}
@@ -134,6 +138,13 @@ spec:
         - name: elasticsearch-certs
           secret:
             secretName: {{ .Values.kibana.ssl.elasticsearch.existingCertSecret }}
+        {{- end }}
+        {{- if .Values.openid.pemTrustedCas.existingSecret }}
+        - name: openid-root-ca
+          secret:
+            secretName: {{ .Values.openid.pemTrustedCas.existingSecret }}
+            items:
+              - key: openid_root_ca.pem
         {{- end }}
     {{- with .Values.kibana.nodeSelector }}
       nodeSelector:

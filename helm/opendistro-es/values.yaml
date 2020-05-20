@@ -85,6 +85,15 @@ kibana:
     # opendistro_security.cookie.secure: true
     # opendistro_security.cookie.password: ${COOKIE_PASS}
 
+    ## OpenId Connect config
+    # opendistro_security.auth.type: "openid"
+    # opendistro_security.openid.connect_url: "https://keycloak.example.com/auth/realms/smsf/.well-known/openid-configuration"
+    # opendistro_security.openid.client_id: "kibana-sso"
+    # opendistro_security.openid.client_secret: "7e0ff1b3-e115-408b-87cf-a694d2ccb6c3"
+    # opendistro_security.openid.base_redirect_url: "https://myapp.foo.com/"
+    # opendistro_security.openid.verify_hostnames: false
+    # opendistro_security.openid.root_ca: "/usr/share/kibana/certs/openid-root-ca/openid-root-ca.pem"
+
 
 
   ## Node labels for pod assignment
@@ -440,6 +449,13 @@ elasticsearch:
     ## If not set and create is true, a name is generated using the fullname template
     name:
 
+openid:
+  pemTrustedCas:
+    # If TLS is used for connecting to the IdP and the IdP uses a self-signed certificate
+    # this secret shall contain the IdP's root CA
+    # The secret must have key named openid-root-ca which should contain the PEM file of the root CA
+    # Example: kubectl create secret generic openid-root-ca --from-file=openid-root-ca=<path to pem-file>
+    existingSecret:
 
 nameOverride: ""
 fullnameOverride: ""
